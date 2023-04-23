@@ -49,8 +49,8 @@ on:
   pull_request:
     paths:
       - '.github/workflow/terraform_destroy.yml'
-   # branches:
-   #   - main
+    branches:
+      - main
   push:
     paths:
       - '.github/workflow/terraform_destroy.yml'
@@ -71,7 +71,7 @@ env:
 jobs:
   validate:
   #terraform:
-    name: Terraform
+    name: TF Distroy
     runs-on: ubuntu-latest
     #environment: production
 
@@ -88,6 +88,9 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Format
       run: terraform fmt -check -recursive
+
+    - name: Terraform init
+      run: terraform init  
 
     - name: Terraform Destroy
       #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
