@@ -128,7 +128,9 @@ jobs:
     - name: TF state pull
       run: terraform state pull  
 
+    - name: TF workspace 
+      run: terraform workspace show  
+
     - name: TF Destroy
-      uses: default/terraform-destroy-workspace@v1
       if: inputs.run_destroy == true
       run: terraform destroy -auto-approve -input=false
