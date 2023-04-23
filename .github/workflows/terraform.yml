@@ -45,13 +45,18 @@
 name: Validate-Terraform-init-plan-apply.yml
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       run_apply:
         required: true
+        description: Whether or not to run Terraform apply
         type: boolean
         default: false
-  workflow_dispatch:
+      run_destroy:
+        required: true
+        description: Whether or not to run Terraform destroy
+        type: boolean
+        default: false  
   pull_request:
     paths:
       - '.github/workflow/terraform.yml'
@@ -75,46 +80,46 @@ env:
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }} # abraham token
 
 jobs:
-  validate:
-  #terraform:
-    name: Terraform Runs
+  run_tf_fmt_check:
+    name: Terraform fmt check
     runs-on: ubuntu-latest
-    #environment: production
-
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
-    #defaults:
-      #run:
-        #shell: bash
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
 
-    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-    #- name: Setup Terraform
-    #  uses: hashicorp/setup-terraform@v1
-    #  with:
-    #    cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-
-    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Format
       run: terraform fmt -check -recursive
 
-    # Checks that all Terraform configuration files adhere to a canonical format
+  run_tf_init_plan:
+    name: Terraform init and plan
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    
     - name: Terraform Init
       run: terraform init
 
-    # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false
 
-      # On push to "main", build or change infrastructure according to Terraform configuration files
-      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
-    #- name: Terraform Apply
+  run_apply_destroy:
+    name: Terraform apply and destroy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    
+
+    - name: Terraform Apply
       #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       #if: github.workflow_dispatch == true
-    #  run: terraform apply -auto-approve -input=false
+      if: inputs.run_apply == true
+      run: terraform apply -auto-approve -input=false
 
     - name: TF Destroy
+      if: inputs.run_destroy == true
       run: terraform destroy -auto-approve -input=false
