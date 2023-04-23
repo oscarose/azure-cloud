@@ -58,9 +58,13 @@ on:
         type: boolean
         default: false
   pull_request:
+    paths:
+      - '.github/workflow/terraform.yml'
     branches:
       - main
   push:
+    paths:
+      - '.github/workflow/terraform.yml'
     branches:
       - main
 
