@@ -45,7 +45,18 @@
 name: Validate Terraform
 
 on:
+  workflow_call:
+    inputs:
+      run_apply:
+        required: true
+        type: boolean
+        default: false
   workflow_dispatch:
+    inputs:
+      run_apply:
+        required: true
+        type: boolean
+        default: false
   pull_request:
     branches:
       - main
