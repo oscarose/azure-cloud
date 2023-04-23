@@ -50,8 +50,8 @@ resource "azurerm_postgresql_flexible_server" "postgres_flexible" {
   zone                   = var.zone_number
   storage_mb             = var.storage_mb
   sku_name               = var.sku_name
-  depends_on = [azurerm_private_dns_zone_virtual_network_link.oscarosednszone]
-  tags = local.tags
+  depends_on             = [azurerm_private_dns_zone_virtual_network_link.oscarosednszone]
+  tags                   = local.tags
 }
 
 resource "azuread_group" "postgres_flexible_server_ad_group" {
