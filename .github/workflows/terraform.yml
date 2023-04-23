@@ -125,6 +125,9 @@ jobs:
       if: inputs.run_apply == true
       run: terraform apply -auto-approve -input=false
 
+    - name: TF state pull
+      run: terraform state pull  
+
     - name: TF Destroy
       if: inputs.run_destroy == true
       run: terraform destroy -auto-approve -input=false
