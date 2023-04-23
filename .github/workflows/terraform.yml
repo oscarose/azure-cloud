@@ -60,8 +60,8 @@ on:
   pull_request:
     paths:
       - '.github/workflow/terraform.yml'
-    branches:
-      - main
+    #branches:
+    #  - main
   push:
     paths:
       - '.github/workflow/terraform.yml'

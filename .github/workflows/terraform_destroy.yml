@@ -49,8 +49,8 @@ on:
   pull_request:
     paths:
       - '.github/workflow/terraform_destroy.yml'
-    branches:
-      - main
+   # branches:
+   #   - main
   push:
     paths:
       - '.github/workflow/terraform_destroy.yml'
