@@ -89,7 +89,7 @@ jobs:
       id: set-time
       run: |
         date +%s%3N
-        echo -e "::set-output name=start-time::$(date +%s%3N)"
+        #echo -e "::set-output name=start-time::$(date +%s%3N)"
         echo "name=start-time::$(date +%s%3N)" >> $GITHUB_OUTPUT
         echo $GITHUB_OUTPUT
     - name: Checkout
