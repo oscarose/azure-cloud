@@ -91,7 +91,11 @@ jobs:
         date +%s%3N
         #echo -e "::set-output name=start-time::$(date +%s%3N)"
         echo "name=start-time::$(date +%s%3N)" >> $GITHUB_OUTPUT
-        echo $GITHUB_OUTPUT
+        #echo $GITHUB_OUTPUT
+
+    - name: Get time value
+      run: echo "${{ steps.set-time.name }}"  
+
     - name: Checkout
       uses: actions/checkout@v3
 
