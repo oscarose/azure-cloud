@@ -106,9 +106,11 @@ jobs:
 
     - name: Set Repo branch
       id: branch
-      run: echo "name=REPO_NAME::$(echo ${GITHUB_REPOSITORY} | sed 's@.*/@@')" >> "$GITHUB_OUTPUT"
-    - name: Echo repo name
-      run: echo "${{ steps.branch.outputs.name }}"       
+      run: |
+        echo "name=REPO_NAME::$(echo ${GITHUB_REPOSITORY} | sed 's@.*/@@')" >> "$GITHUB_OUTPUT"
+        echo "${{ steps.branch.outputs.name }}"
+    #- name: Echo repo name
+    #  run: echo "${{ steps.branch.outputs.name }}"       
 
     - name: Checkout
       uses: actions/checkout@v3
