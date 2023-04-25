@@ -89,8 +89,8 @@ jobs:
       id: set-time
       run: |
         date +%s%3N
-        echo -e "::set-output name=start-time::$(date +%s%3N)"
-        #echo "name=start-time::$(date +%s%3N)" >> "$GITHUB_OUTPUT"
+        #echo -e "::set-output name=start-time::$(date +%s%3N)"
+        echo "name=start-time::$(date +%s%3N)" >> "$GITHUB_OUTPUT"
 
     - name: get end time
       id: end-time
