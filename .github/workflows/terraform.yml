@@ -85,6 +85,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: get start time
+      id: set-time
+      run: |
+        date +%s%3N
+        echo -e "::set-output name=start-time::$(date +%s%3N)"
     - name: Checkout
       uses: actions/checkout@v3
 
