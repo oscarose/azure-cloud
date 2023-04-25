@@ -91,10 +91,18 @@ jobs:
         date +%s%3N
         #echo -e "::set-output name=start-time::$(date +%s%3N)"
         echo "name=start-time::$(date +%s%3N)" >> "$GITHUB_OUTPUT"
-        #echo $GITHUB_OUTPUT
+
+    - name: get end time
+      id: end-time
+      run: |
+        date +%s%3N
+        echo "test=end-time::$(date +%s%3N)" >> "$GITHUB_OUTPUT"  
 
     - name: Get time value
       run: echo "${{ steps.set-time.outputs.name }}"  
+
+    - name: Get end time value
+      run: echo "${{ steps.end-time.outputs.test }}"    
 
     - name: Checkout
       uses: actions/checkout@v3
