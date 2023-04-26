@@ -100,13 +100,13 @@ jobs:
       id: end-time
       run: |
         date +%s%3N
-        echo "test=end-time::$(date +%s%3N)" >> "$GITHUB_OUTPUT"  
+        echo "name=end-time::$(date +%s%3N)" >> "$GITHUB_OUTPUT"  
 
     - name: Get time value
       run: echo "${{ steps.set-time.outputs.name }}"  
 
     - name: Get end time value
-      run: echo "${{ steps.end-time.outputs.test }}" 
+      run: echo "${{ steps.end-time.outputs.name }}" 
 
     - name: Set Repo branch
       id: branch
