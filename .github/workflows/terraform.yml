@@ -134,7 +134,7 @@ jobs:
       - env:
           OUTPUT1: ${{needs.run_tf_fmt_check.outputs.output1}}
           OUTPUT2: ${{needs.run_tf_fmt_check.outputs.output2}}
-          OUTPUT2: ${{needs.run_tf_fmt_check.outputs.output3}}
+          OUTPUT3: ${{needs.run_tf_fmt_check.outputs.output3}}
         run: echo "$OUTPUT1 $OUTPUT2 $OUTPUT3"    
 
   run_tf_init_plan:
