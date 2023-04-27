@@ -111,8 +111,10 @@ jobs:
     - name: Set Repo branch
       id: branch
       run: |
-        echo "name=REPO_NAME::$(echo ${GITHUB_REPOSITORY} | sed 's@.*/@@')" >> "$GITHUB_OUTPUT"
-        echo "${{ steps.branch.outputs.name }}"
+          plan -out="$outfile"
+        echo "REPO_NAME=$outfile" >> "$GITHUB_OUTPUT"
+        #echo "name=REPO_NAME::$(echo ${GITHUB_REPOSITORY} | sed 's@.*/@@')" >> "$GITHUB_OUTPUT"
+        #echo "${{ steps.branch.outputs.name }}"
     - name: Echo repo name
       run: echo "${{ steps.branch.outputs.name }}"       
 
